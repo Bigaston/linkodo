@@ -1,11 +1,19 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Link = sequelize.define('Link', {
-    short: DataTypes.STRING,
-    long: DataTypes.STRING,
-    nb: DataTypes.INTEGER
-  }, {});
-  Link.associate = function(models) {
-  };
-  return Link;
+	const Link = sequelize.define('Link', {
+		short: {
+			type: DataTypes.STRING,
+			unique: true
+		},
+		long: DataTypes.STRING,
+		nb: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0
+		}
+	}, {});
+
+	Link.associate = function(models) {
+	
+	};
+	return Link;
 };
