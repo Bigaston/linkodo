@@ -1,2 +1,2 @@
 # linkodo
-Réducteur d'URL simple sans statistiques
+Réducteur d'URL simple sur NodeJS
