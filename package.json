@@ -1,0 +1,28 @@
+{
+  "name": "linkodo",
+  "version": "1.0.0",
+  "description": "Réducteur d'URL simple sans statistiques",
+  "main": "linkodo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run init_file & npm run bdd",
+    "bdd": "node ./cli/bdd.js",
+    "init_file": "node ./cli/init_file.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigaston/linkodo.git"
+  },
+  "author": "Bigaston",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bigaston/linkodo/issues"
+  },
+  "homepage": "https://github.com/Bigaston/linkodo#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "mariadb": "^2.4.0",
+    "sequelize": "^5.21.13",
+    "sqlite3": "^4.2.0"
+  }
+}
