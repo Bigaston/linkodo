@@ -22,6 +22,12 @@ app.use(session({
     cookie: { secure: false }
 }))
 
+app.get("/l/hash/*", (req, res) => {
+    bcrypt.hash(req.path.replace("/l/hash/", ""), 12, (err, enc) => {
+        res.send(enc)
+    })
+})
+
 app.get("/", (req, res) => {
     if (!!req.session.logged) {
         res.redirect("/l/create")
@@ -48,7 +54,7 @@ app.get("/l/list", (req, res) => {
 
 app.get("/l/get_list", (req, res) => {
     if (!!req.session.logged) {
-        bdd.Link.findAll().then(links => {
+        bdd.Link.findAll({order: [["id", "DESC"]]}).then(links => {
             let tab = [];
 
             links.forEach(l => {
@@ -126,6 +132,19 @@ app.get("/:short", (req, res) => {
             res.sendFile(path.join(__dirname, "./web/404.html"));
         }
     })
+})
+
+app.get("/p/*", (req, res) => {
+    if (!!req.session.logged) {
+        bdd.Link.create({
+            long: req.path.replace("/p/", ""),
+            short: randtoken.generate(5)
+        }).then(() => {
+            res.redirect("/l/list")
+        })
+    } else {
+        res.redirect("/")
+    }
 })
 
 app.listen(process.env.PORT, () => console.log(`Serveur lancé sur le port ${process.env.PORT}`))
